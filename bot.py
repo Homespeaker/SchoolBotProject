@@ -79,7 +79,7 @@ def location(message):
 
 @bot.message_handler(content_types=['text'])
 def otvetka(message):
-    try:
+    # try:
         def photo(link):
             with open(link, 'rb') as f:
                 bot.send_photo(message.chat.id, f)#photo('https://imgur.com/a/385WKtY')
@@ -129,8 +129,8 @@ def otvetka(message):
                 bot.send_message(message.chat.id, f'Требования по посадке данных семян соответствуют погодным условиям на неделю вперед. Сейчас будут выведены рекомендации для посадки.')
                 bot.send_message(message.chat.id, f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая влажность почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostpochv']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}", reply_markup=restart)
 
-    except:
-        bot.send_message(message.chat.id, f'Неверный ввод, нажмите /start для перезапуска.')
+    # except:
+    #     bot.send_message(message.chat.id, f'Неверный ввод, нажмите /start для перезапуска.')
 
 
 bot.polling()
