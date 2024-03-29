@@ -7,7 +7,7 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 TOKEN = "6182241691:AAFl3lahEdNLQGp3hurvMI8JeYbAIRlHc54"
 bot = telebot.TeleBot(TOKEN)
 full_user_data = {}
-API_KEY = '85b6ae79-e768-46c3-adad-61122a1dbd47'
+API_KEY = '8c03ac1e-e46a-454b-aad8-9acea9fe9b97'
 headers = {
     'X-Yandex-API-Key': API_KEY
 }
