@@ -123,11 +123,12 @@ def otvetka(message):
                             bot.send_photo(message.chat.id, f"Ваша влажность почвы не подходит:/nВаша влажность: {int(vlajnostpo4v)}. Нужная влажность: {objects[message.text]['vlajnostpochv']}")
                     
                         break
+                    elif full_user_data[str(message.from_user.id)]['niceable']:
+                        bot.send_message(message.chat.id, f'Требования по посадке данных семян соответствуют погодным условиям на неделю вперед. Сейчас будут выведены рекомендации для посадки.')
+                        bot.send_message(message.chat.id, f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая влажность почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostpochv']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}", reply_markup=restart)
             else:
                 print(f'Ошибка: {response.status_code}')
-            if full_user_data[str(message.from_user.id)]['niceable']:
-                bot.send_message(message.chat.id, f'Требования по посадке данных семян соответствуют погодным условиям на неделю вперед. Сейчас будут выведены рекомендации для посадки.')
-                bot.send_message(message.chat.id, f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая влажность почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostpochv']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}", reply_markup=restart)
+
 
     # except:
     #     bot.send_message(message.chat.id, f'Неверный ввод, нажмите /start для перезапуска.')
