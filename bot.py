@@ -106,7 +106,7 @@ def otvetka(message):
                 # print(data["fact"]["temp"])
                 for day in data['forecasts']:
                     date = day['date']
-                    temperature = day['parts']['day']['surfaceTemperature']
+                    temperature = day['parts']['day']['temp_avg']
                     temppo4v = day['parts']['day']['soilTemperature']
                     vlajnostvozdux = day['parts']['day']['humidity']
                     vlajnostpo4v = day['parts']['day']['soilMoisture']
