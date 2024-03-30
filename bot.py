@@ -107,9 +107,9 @@ def otvetka(message):
                 for day in data['forecasts']:
                     date = day['date']
                     temperature = day['parts']['day']['temp_avg']
-                    temppo4v = day['parts']['day']['soil_temp']
-                    vlajnostvozdux = day['parts']['day']['soil_temp']
-                    vlajnostpo4v = day['parts']['day']['soil_moisture']
+                    temppo4v = day['parts']['day']['soilTemperature']
+                    vlajnostvozdux = day['parts']['day']['humidity']
+                    vlajnostpo4v = day['parts']['day']['soilMoisture']
                     if int(temperature) < objects[message.text]['optimtempforplantday'] or int(temppo4v) < objects[message.text]['optimtemppochv'] or int(vlajnostvozdux) < objects[message.text]['vlajnostvozdux'] or int(vlajnostpo4v) < objects[message.text]['vlajnostpochv']:
                         bot.send_message(message.chat.id, f'Семена посадить не получится, {date} погодные условия не будут соответствовать рекомендуемым значениям для данного растения.', reply_markup=restart)
                         # full_user_data[str(message.from_user.id)]['niceable'] = False
