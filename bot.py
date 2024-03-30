@@ -114,13 +114,13 @@ def otvetka(message):
                         bot.send_message(message.chat.id, f'Семена посадить не получится, {date} погодные условия не будут соответствовать рекомендуемым значениям для данного растения.', reply_markup=restart)
                         # full_user_data[str(message.from_user.id)]['niceable'] = False
                         if int(temperature) < objects[message.text]['optimtempforplantday']:
-                            bot.send_photo(message.chat.id, f"Ваша температура не подходит:/n Вашатемпература: {int(temperature)}. Нужная температура: {objects[message.text]['optimtempforplantday']}")
+                            bot.send_message(message.chat.id, f"Ваша температура не подходит:/n Вашатемпература: {int(temperature)}. Нужная температура: {objects[message.text]['optimtempforplantday']}")
                         if int(temppo4v) < objects[message.text]['optimtemppochv']:
-                            bot.send_photo(message.chat.id, f"Ваша температура почвы не подходит:/nВаша температура: {int(temppo4v)}. Нужная температура: {objects[message.text]['optimtemppochv']}")
+                            bot.send_message(message.chat.id, f"Ваша температура почвы не подходит:/nВаша температура: {int(temppo4v)}. Нужная температура: {objects[message.text]['optimtemppochv']}")
                         if int(vlajnostvozdux) < objects[message.text]['vlajnostvozdux']:
-                            bot.send_photo(message.chat.id, f"Ваша влажность воздуха не подходит:/nВаша влажность: {int(vlajnostvozdux)}. Нужная влажность: {objects[message.text]['vlajnostvozdux']}")
+                            bot.send_message(message.chat.id, f"Ваша влажность воздуха не подходит:/nВаша влажность: {int(vlajnostvozdux)}. Нужная влажность: {objects[message.text]['vlajnostvozdux']}")
                         if int(vlajnostvozdux) < objects[message.text]['vlajnostvozdux']:
-                            bot.send_photo(message.chat.id, f"Ваша влажность почвы не подходит:/nВаша влажность: {int(vlajnostpo4v)}. Нужная влажность: {objects[message.text]['vlajnostpochv']}")
+                            bot.send_message(message.chat.id, f"Ваша влажность почвы не подходит:/nВаша влажность: {int(vlajnostpo4v)}. Нужная влажность: {objects[message.text]['vlajnostpochv']}")
                     
                         break
                     elif full_user_data[str(message.from_user.id)]['niceable']:
