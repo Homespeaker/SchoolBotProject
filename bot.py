@@ -150,8 +150,11 @@ def otvetka(message):
                         bot.send_message(message.chat.id,
                                          f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}",
                                          reply_markup=restart)
+                        break
             else:
                 print(f'Ошибка: {response.status_code}')
+                bot.send_message(message.chat.id,
+                                         f'Ошибка в запросе к апи')
 
 
     except:
