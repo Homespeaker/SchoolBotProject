@@ -100,7 +100,7 @@ def otvetka(message):
             if message.text == "Да":
                 bot.send_message(message.chat.id, 'Хорошо, для начала следуйте фото инструкции.', reply_markup=xz)
                 bot.send_photo(message.chat.id, photo='https://imgur.com/a/385WKtY')
-                bot.send_message(message.chat.id, 'Жду геолокацию места, куда ты хочешь посадить растение.',
+                bot.send_message(message.chat.id, 'Жду геолокацию места, куда ты хочешь посадить растение. Важно чтобы твое место находилось на территории России!',
                                  reply_markup=xz)
                 full_user_data[str(message.from_user.id)]['number_question'] = "1"
             else:
@@ -111,7 +111,6 @@ def otvetka(message):
             params = {
                 'lat': full_user_data[str(message.from_user.id)]['user_latitude'],
                 'lon': full_user_data[str(message.from_user.id)]['user_longitude'],
-                'lang': 'ru_RU',
                 'limit': 7  # прогноз на 3 дня вперед
             }
             response = requests.get(url, headers=headers, params=params)
@@ -132,25 +131,27 @@ def otvetka(message):
                         bot.send_message(message.chat.id,
                                          f'Семена посадить не получится, {date} погодные условия не будут соответствовать рекомендуемым значениям для данного растения.',
                                          reply_markup=restart)
-                        # full_user_data[str(message.from_user.id)]['niceable'] = False
+                        print(full_user_data[str(message.from_user.id)]['niceable'])
+                        full_user_data[str(message.from_user.id)]['niceable'] = False
                         if int(temperature) < objects[message.text]['optimtempforplantday']:
                             bot.send_message(message.chat.id,
-                                             f"Ваша температура не подходит:\n Вашатемпература: {int(temperature)}. Нужная температура: {objects[message.text]['optimtempforplantday']}")
+                                             f"Ваша температура не подходит:\n Ваша температура: {int(temperature)}. Нужная температура: {objects[message.text]['optimtempforplantday']}")
                         if int(temppo4v) < objects[message.text]['optimtemppochv']:
                             bot.send_message(message.chat.id,
                                              f"Ваша температура почвы не подходит:\nВаша температура: {int(temppo4v)}. Нужная температура: {objects[message.text]['optimtemppochv']}")
                         if int(vlajnostvozdux) < objects[message.text]['vlajnostvozdux']:
                             bot.send_message(message.chat.id,
                                              f"Ваша влажность воздуха не подходит:\nВаша влажность: {int(vlajnostvozdux)}. Нужная влажность: {objects[message.text]['vlajnostvozdux']}")
+                        break
 
-                        break
-                    elif full_user_data[str(message.from_user.id)]['niceable']:
-                        bot.send_message(message.chat.id,
-                                         f'Требования по посадке данных семян соответствуют погодным условиям на неделю вперед. Сейчас будут выведены рекомендации для посадки.')
-                        bot.send_message(message.chat.id,
-                                         f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}",
-                                         reply_markup=restart)
-                        break
+
+                if full_user_data[str(message.from_user.id)]['niceable']:
+                    bot.send_message(message.chat.id,
+                                     f'Требования по посадке данных семян соответствуют погодным условиям на неделю вперед. Сейчас будут выведены рекомендации для посадки.')
+                    bot.send_message(message.chat.id,
+                                     f"Рекомендуемая влажность воздуха: {objects[full_user_data[str(message.from_user.id)]['object']]['vlajnostvozdux']}%\nРекомендуемая температура почвы: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtemppochv']}°\nРекомендуемая температура днём: {objects[full_user_data[str(message.from_user.id)]['object']]['optimtempforplantday']}°\nОжидание до полной готовности: {objects[full_user_data[str(message.from_user.id)]['object']]['timetoprime']}",
+                                     reply_markup=restart)
+
             else:
                 print(f'Ошибка: {response.status_code}')
                 bot.send_message(message.chat.id,
@@ -158,7 +159,7 @@ def otvetka(message):
 
 
     except:
-        bot.send_message(message.chat.id, f'Неверный ввод, нажмите /start для перезапуска.')
+        bot.send_message(message.chat.id, f'Неверный ввод, нажмите /start для перезапуска. Важно чтобы глокация выбранного места была в России!')
 
 
 bot.polling()
